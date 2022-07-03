@@ -1,0 +1,6 @@
+#ifndef STM32F4_CONFIG_H
+#define STM32F4_CONFIG_H
+
+#define HSE_VALUE 25000000
+
+#endif //STM32F4_CONFIG_H
