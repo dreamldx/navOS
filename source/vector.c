@@ -3,6 +3,7 @@ int main(void);
 extern unsigned int __stack;
 
 void __reset_handler(void) {
+    __asm("ldr sp, = __stack");
     main();
 }
 void __blocking_handler(void) { while (1); }

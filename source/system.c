@@ -1,29 +1,40 @@
+#include "stm32h743xx.h"
 
+#include "hal/core.h"
+#include "hal/flash.h"
+#include "hal/power.h"
+#include "hal/rcc.h"
 
 void InitializeSystem() {
-//    CoreEnableCP10CP11();
-//
-//    PowerSetVOS(POWER_VOS_SCALE_100MHZ);
-//
-//    FlashSetLatency(3);
-//    FlashSetInstructionCacheEnable(Enable);
-//    FlashSetDataCacheEnable(Enable);
-//    FlashSetPrefetchEnable(Enable);
-//
-//    RCCSetPLLEnable(Disable);
-//
-//    RCCSetPLLSource(RCC_PLLCFGR_PLLSRC_HSE);
-//    RCCSetPLLM(13);
-//    RCCSetPLLN(104);
-//    RCCSetPLLP(2);
-//    RCCSetHSEEnabled(Enable);
-//    RCCSetPLLEnable(Enable);
-//
-//    while( !RCCPLLReady() );
-//
-//    RCCSetAHBPrescaler(RCC_CFGR_HPRE_DIV1);
-//    RCCSetAPB1Prescaler(RCC_CFGR_PPRE1_DIV2);
-//    RCCSetAPB2Prescaler(RCC_CFGR_PPRE2_DIV1);
-//
-//    RCCSetSystemClockSource(RCC_CFGR_SW_PLL);
+    CoreEnableCP10CP11();
+
+    PowerSetVoltageScaling(POWER_VOLTAGE_SCALE_1);
+    FlashSetLatency(4);
+
+    RCCSetPLL1Enable(Disable);
+    RCCSetPLL2Enable(Disable);
+    RCCSetPLL3Enable(Disable);
+
+    RCCSetPLLSource(RCC_PLLCKSELR_PLLSRC_HSE);
+    RCCSetPLL1InputRange(RCC_PLL_INPUT_RANGE_2_4_MHZ);
+    RCCSetPLL1OutputRange(RCC_PLL_OUTPUT_RANGE_WIDE);
+    RCCSetPLL1DividerM(2);
+    RCCSetPLL1DividerN(240);
+    RCCSetPLL1DividerPEnable(Enable);
+    RCCSetPLL1DividerP(2);
+
+    RCCSetDomain1ClockPrescaler(RCC_DOMAIN1_CLOCK_PRESCALER_DIV_1);
+    RCCSetAHBPrescaler(RCC_AHB_PRESCALER_DIV_2);
+    RCCSetAPB1Prescaler(RCC_APB_PRESCALER_DIV_2);
+    RCCSetAPB2Prescaler(RCC_APB_PRESCALER_DIV_2);
+    RCCSetAPB3Prescaler(RCC_APB_PRESCALER_DIV_2);
+    RCCSetAPB4Prescaler(RCC_APB_PRESCALER_DIV_2);
+
+    RCCSetHSEEnable(Enable);
+    RCCSetPLL1Enable(Enable);
+
+    while( !RCCHSEReady() );
+    while( !RCCPLL1Ready() );
+
+    RCCSetSystemClockSource(RCC_CFGR_SW_PLL1);
 }
