@@ -72,4 +72,9 @@
 // Sys -----------------------------------------------
 #define RCCSetSystemClockSource(x) SetReg(RCC->CFGR, RCC_CFGR_SW_Pos, RCC_CFGR_SW_Msk, x)
 
+
+// Peripheral ----------------------------------------
+#define RCCEnableAHB4()     (RCC->AHB4ENR)
+#define RCCEnableGPIOE()    (RCC->AHB4ENR |= (1 << RCC_AHB4ENR_GPIOEEN_Pos))
+
 #endif //STM32H7_RCC_H

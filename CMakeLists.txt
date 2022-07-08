@@ -62,7 +62,7 @@ include_directories("${PROJECT_NAME}" PUBLIC  "./include")
 
 
 file(GLOB_RECURSE sources "source/*.[c|h]" "peripherals/*.[c|h]")
-add_executable("${PROJECT_NAME}" ${sources} include/hal/core.h include/hal/flash.h include/hal/reg.h include/hal/dwt.h include/target.h include/hal/power.h include/hal/timer.h)
+add_executable("${PROJECT_NAME}" ${sources})
 
 set_target_properties("${PROJECT_NAME}" PROPERTIES LINK_FLAGS "${link_flags}")
 

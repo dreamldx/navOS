@@ -2,17 +2,33 @@
 
 #include "system.h"
 #include "hal/dwt.h"
+#include "hal/gpio.h"
+#include "hal/rcc.h"
 
 #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 
 int main()
 {
     InitializeSystem();
+
     uint32_t cnt = 0;
     DWTStart();
+
+    RCCEnableGPIOE();
+
+
+    GPIOSetMode(GPIOE, GPIO_PIN_3, GPIO_MODE_OUTPUT);
+    GPIOSetOutputMode(GPIOE, GPIO_PIN_3, GPIO_OTYPE_PP);
+    GPIOSetPullUpDown(GPIOE, GPIO_PIN_3, GPIO_PULL_DOWN);
+    GPIOSetOutputSpeed(GPIOE, GPIO_PIN_3, GPIO_MODE_SPEED_FAST);
+
+
     while(1) {
         DWTReset();
-        for (float i=0.0f;i<200.0f;i++);
+        GPIOSetHigh(GPIOE, GPIO_PIN_3);
+        for (uint32_t i=0;i<600000;i++);
+        GPIOSetLow(GPIOE, GPIO_PIN_3);
+        for (uint32_t i=0;i<600000;i++);
         cnt = DWRCounter();
         cnt = 0;
 
