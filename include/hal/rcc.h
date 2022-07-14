@@ -76,5 +76,6 @@
 // Peripheral ----------------------------------------
 #define RCCEnableAHB4()     (RCC->AHB4ENR)
 #define RCCEnableGPIOE()    (RCC->AHB4ENR |= (1 << RCC_AHB4ENR_GPIOEEN_Pos))
+#define RCCEnableTimer15()  (RCC->APB2ENR |= (1 << RCC_APB2ENR_TIM15EN_Pos))
 
 #endif //STM32H7_RCC_H

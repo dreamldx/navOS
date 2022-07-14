@@ -11,6 +11,7 @@ void InitializeSystem() {
     PowerSetVoltageScaling(POWER_VOLTAGE_SCALE_1);
     FlashSetLatency(4);
 
+    RCCSetSystemClockSource(RCC_CFGR_SW_HSI);
     RCCSetPLL1Enable(Disable);
     RCCSetPLL2Enable(Disable);
     RCCSetPLL3Enable(Disable);
