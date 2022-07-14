@@ -5,7 +5,7 @@
 #include "hal/power.h"
 #include "hal/rcc.h"
 
-void InitializeSystem() {
+void SysInit() {
     CoreEnableCP10CP11();
 
     PowerSetVoltageScaling(POWER_VOLTAGE_SCALE_1);

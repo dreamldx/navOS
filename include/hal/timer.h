@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "hal/reg.h"
 
 // Enable Timer:
