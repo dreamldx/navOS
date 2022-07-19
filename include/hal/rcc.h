@@ -28,6 +28,11 @@
 
 #define RCCSetPLL2Enable(x)      SetReg(RCC->CR, RCC_CR_PLL2ON_Pos, RCC_CR_PLL2ON_Msk, x)
 #define RCCSetPLL2DivisorM(x)    SetReg(RCC->PLLCKSELR, RCC_PLLCKSELR_DIVM2_Pos, RCC_PLLCKSELR_DIVM2_Msk, x)
+#define RCCSetPLL2DivisorN(x)    SetReg(RCC->PLL2DIVR, RCC_PLL2DIVR_N2_Msk, RCC_PLL2DIVR_N2_Msk, x)
+#define RCCSetPLL2DividerPEnable(x) SetReg(RCC->PLLCFGR, RCC_PLLCFGR_DIVP2EN_Pos, RCC_PLLCFGR_DIVP2EN_Msk, x)
+#define RCCSetPLL2DivisorP(x)    SetReg(RCC->PLL2DIVR, RCC_PLL2DIVR_P2_Msk, RCC_PLL2DIVR_P2_Msk, x)
+#define RCCSetPLL2InputRange(x)     SetReg(RCC->PLLCFGR, RCC_PLLCFGR_PLL2RGE_Pos, RCC_PLLCFGR_PLL2RGE_Msk, x)
+#define RCCSetPLL2OutputRange(x)    SetReg(RCC->PLLCFGR, RCC_PLLCFGR_PLL2VCOSEL_Pos, RCC_PLLCFGR_PLL2VCOSEL_Msk, x)
 
 #define RCCSetPLL3Enable(x)      SetReg(RCC->CR, RCC_CR_PLL3ON_Pos, RCC_CR_PLL3ON_Msk, x)
 #define RCCSetPLL3DivisorM(x)    SetReg(RCC->PLLCKSELR, RCC_PLLCKSELR_DIVM3_Pos, RCC_PLLCKSELR_DIVM3_Msk, x)
@@ -77,5 +82,6 @@
 #define RCCEnableAHB4()     (RCC->AHB4ENR)
 #define RCCEnableGPIOE()    (RCC->AHB4ENR |= (1 << RCC_AHB4ENR_GPIOEEN_Pos))
 #define RCCEnableTimer15()  (RCC->APB2ENR |= (1 << RCC_APB2ENR_TIM15EN_Pos))
+#define RCCEnableADC1()     (RCC->AHB1ENR |= (1 << RCC_AHB1ENR_ADC12EN_Pos))
 
 #endif //STM32H7_RCC_H

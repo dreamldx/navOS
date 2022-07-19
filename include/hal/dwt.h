@@ -4,7 +4,7 @@
 #define DWTStart()     DWT->CTRL |= 1
 #define DWTStop()      DWT->CTRL &= (~1)
 #define DWTReset()     DWT->CYCCNT = 0
-#define DWRCounter()    DWT->CYCCNT
+#define DWTCounter()   DWT->CYCCNT
 
 
 #endif //NAVOS_DWT_H

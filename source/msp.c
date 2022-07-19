@@ -1,13 +1,17 @@
 #include "stm32h743xx.h"
 
+#include "hal/adc.h"
 #include "hal/gpio.h"
 #include "hal/timer.h"
 #include "hal/rcc.h"
 
+void MspRCC() {
 
-void MspInit() {
+
+}
+
+void MspGPIO() {
     RCCEnableGPIOE();
-    RCCEnableTimer15();
 
     GPIOSetMode(GPIOE, GPIO_PIN_3, GPIO_MODE_OUTPUT);
     GPIOSetOutputMode(GPIOE, GPIO_PIN_3, GPIO_OTYPE_PP);
@@ -26,6 +30,10 @@ void MspInit() {
     GPIOSetPullUpDown(GPIOE, GPIO_PIN_5, GPIO_PULL_NO);
     GPIOSetOutputSpeed(GPIOE, GPIO_PIN_5, GPIO_MODE_SPEED_FAST);
     GPIOSetAlternateFunction(GPIOE, GPIO_PIN_5, 4);
+}
+
+void MspTimer() {
+    RCCEnableTimer15();
 
     TimerSetPerScaler(TIM15, 10000);
     TimerSetAutoReload(TIM15, 40000);
@@ -39,4 +47,27 @@ void MspInit() {
     TimerSetOutputChannel1Enable(TIM15, Enable);
 
     TimerSetCounterEnable(TIM15, TIMER_ENABLE);
+}
+
+void MspADC() {
+    RCCEnableADC1();
+
+    ADCSetDeepPower(ADC1, Disable);
+    ADCSetVoltReg(ADC1, Enable);
+    for (uint32_t i=0;i<20000;i++)
+    while (!ADCLDOReady(ADC1)) ;
+    ADCSetClockMode(ADC12_COMMON, ADC_CLOCK_MODE_HCLK_2);
+
+    ADCSetCalibration(ADC1, Enable);
+    while (ADCCalibrationDone(ADC1)) ;
+
+    ADCSetEnable(ADC1, Enable);
+    while (!ADCReady(ADC1)) ;
+}
+
+void MspInit() {
+    MspRCC();
+    MspGPIO();
+    MspTimer();
+    MspADC();
 }

@@ -24,6 +24,14 @@ void SysInit() {
     RCCSetPLL1DividerPEnable(Enable);
     RCCSetPLL1DividerP(2);
 
+    RCCSetPLL2InputRange(RCC_PLL_INPUT_RANGE_2_4_MHZ);
+    RCCSetPLL2OutputRange(RCC_PLL_OUTPUT_RANGE_WIDE);
+    RCCSetPLL2DivisorM(1);
+    RCCSetPLL2DivisorN(40);
+    RCCSetPLL2DividerPEnable(Enable);
+    RCCSetPLL2DivisorP(2);
+    RCCSetPLL2Enable(Enable);
+
     RCCSetDomain1ClockPrescaler(RCC_DOMAIN1_CLOCK_PRESCALER_DIV_1);
     RCCSetAHBPrescaler(RCC_AHB_PRESCALER_DIV_2);
     RCCSetAPB1Prescaler(RCC_APB_PRESCALER_DIV_2);
